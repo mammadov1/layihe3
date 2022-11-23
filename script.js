@@ -41,7 +41,28 @@ function decPlay() {
   });
 }
 decPlay();
+function FechOne(baseNumber, symbolsNumber) {
+  if (baseNumber != symbolsNumber) {
+    fetch(`${url}base=${symbolsNumber}&symbols=${baseNumber}`)
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        fromOne.value =
+          Number(fromTwo.value.replace(/\s+/g, "")) * data.rates[`${baseNumber}`];
+          twoNum.innerHTML = `1${data.base}=${data.rates[`${baseNumber}`]}${baseNumber}`;
 
+        fetch(`${url}base=${baseNumber} & symbols=${symbolsNumber}`)
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            oneNum.innerHTML = `1${data.base}=${data.rates[`${symbolsNumber}`]}${symbolsNumber}`;
+          });
+      });
+  }   else {fromOne.value = fromTwo.value; oneNum.innerHTML = `1${base}=1${base}`; twoNum.innerHTML = `1${base}=1${base}`;
+  }
+}
 fromOne.value = 1;
 function fromNumber() {
   fromOne.addEventListener("input", () => {
@@ -71,8 +92,8 @@ function api(boxname) {
   if (boxname == "box-two") {
     FechTwo(base, symbols);
   }
-  if (boxname == "box-one") {
-    FechOne(base, symbols);
+            if (boxname == "box-one") {
+              FechOne(base, symbols);
   }
 }
 function decOne(){
@@ -105,37 +126,7 @@ function FechOne(baseNumber, symbolsNumber) {
             oneNum.innerHTML = `1${data.base}=${data.rates[`${symbolsNumber}`]}${symbolsNumber}`;
           });
       });
-  } 
-  else {
-    fromOne.value = fromTwo.value;
-    oneNum.innerHTML = `1${base}=1${base}`;
-    twoNum.innerHTML = `1${base}=1${base}`;
-  }
-}
-function FechTwo(baseNumber, symbolsNumber) {
-  if (baseNumber != symbolsNumber) {
-    fetch(`${url}base=${baseNumber}&symbols=${symbolsNumber}`)
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        fromTwo.value =
-          fromOne.value.replace(/\s+/g, "") * data.rates[`${symbolsNumber}`];
-          oneNum.innerHTML = `1${data.base}=${data.rates[`${symbolsNumber}`]}${symbolsNumber}`;
-          
-        fetch(`${url}base=${symbolsNumber} & symbols=${baseNumber}`)
-          .then((response) => {
-            return response.json();
-          })
-          .then((data) => {
-            twoNum.innerHTML = `1${data.base}=${data.rates[`${baseNumber}`]}${baseNumber}`;
-          });
-      });
-  } 
-  else {
-    fromTwo.value = fromOne.value;
-    oneNum.innerHTML = `1${base}=1${base}`;
-    twoNum.innerHTML = `1${base}=1${base}`;
+  }   else {fromOne.value = fromTwo.value; oneNum.innerHTML = `1${base}=1${base}`; twoNum.innerHTML = `1${base}=1${base}`;
   }
 }
  var numberMask = IMask(fromOne, {
@@ -148,7 +139,30 @@ function FechTwo(baseNumber, symbolsNumber) {
     radix: ".",
     mapToRadix: [","],
   });
-  var numberMask = IMask(fromTwo, {
+function FechTwo(baseNumber, symbolsNumber) {
+  if (baseNumber != symbolsNumber) {
+    fetch(`${url}base=${baseNumber}&symbols=${symbolsNumber}`)
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        fromTwo.value =
+          fromOne.value.replace(/\s+/g, "") * data.rates[`${symbolsNumber}`]; oneNum.innerHTML = `1${data.base}=${data.rates[`${symbolsNumber}`]}${symbolsNumber}`;
+          
+        fetch(`${url}base=${symbolsNumber} & symbols=${baseNumber}`)
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            twoNum.innerHTML = `1${data.base}=${data.rates[`${baseNumber}`]}${baseNumber}`;
+          });
+      });
+  } 
+  else {
+    fromTwo.value = fromOne.value; oneNum.innerHTML = `1${base}=1${base}`; twoNum.innerHTML = `1${base}=1${base}`;
+  }
+}
+ var numberMask = IMask(fromTwo, {
     mask: Number,
     signed: false,           
     scale: 6,
@@ -158,6 +172,7 @@ function FechTwo(baseNumber, symbolsNumber) {
     radix: ".",
     mapToRadix: [","],
   });
+ 
 
  
 
