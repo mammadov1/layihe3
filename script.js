@@ -67,7 +67,7 @@ function fromNumber() {
   });
 }
 fromNumber();
-function apiBox(boxname) {
+function api(boxname) {
   if (boxname == "box-two") {
     FechTwo(base, symbols);
   }
