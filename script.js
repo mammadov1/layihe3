@@ -7,12 +7,12 @@ let fromTwo = document.querySelector(".from-input-two");
 let oneNum = document.querySelector(".number-one");
 let twoNum = document.querySelector(".number-two");
 
+let url = "https://api.exchangerate.host/latest?";
 let base = "RUB";
 let symbols = "USD";
 
-let url = "https://api.exchangerate.host/latest?";
-FechTwo(base, symbols)
 
+FechTwo(base, symbols)
  var numberMask = IMask(fromOne, {
     mask: Number,
      signed: false,           
@@ -26,27 +26,26 @@ FechTwo(base, symbols)
 function decPlay() {
   oneBox.forEach((item) => {
     item.addEventListener("click", function () {
-      oneBox.forEach((item) => {
-        item.classList.remove("money-start");
+      oneBox.forEach((item) => {item.classList.remove("money-start");
       });
       base = this.innerHTML;
+
       api(this.parentElement.classList[0]);
     });
-    item.addEventListener("click", () => {
-      item.classList.add("money-start");
+    item.addEventListener("click", () => {item.classList.add("money-start");
     });
   });
 
   twoBox.forEach((item) => {
     item.addEventListener("click", function () {
-      twoBox.forEach((item) => {
-        item.classList.remove("money-start");
+      twoBox.forEach((item) => {item.classList.remove("money-start");
       });
       symbols = this.innerHTML;
+
       api(this.parentElement.classList[0]);
     });
     item.addEventListener("click", () => {
-      item.classList.add("money-start");
+                 item.classList.add("money-start");
     });
   });
 }
@@ -58,8 +57,8 @@ function FechOne(baseNumber, symbolsNumber) {
         return res.json();
       })
       .then((data) => {
-        fromOne.value =
-          Number(fromTwo.value.replace(/\s+/g, "")) * data.rates[`${baseNumber}`];
+        fromOne.value =Number(fromTwo.value.replace(/\s+/g, "")) * data.rates[`${baseNumber}`];
+
           twoNum.innerHTML = `1${data.base}=${data.rates[`${baseNumber}`]}${baseNumber}`;
 
         fetch(`${url}base=${baseNumber} & symbols=${symbolsNumber}`)
@@ -102,7 +101,7 @@ function api(boxname) {
   if (boxname == "box-two") {
     FechTwo(base, symbols);
   }
-            if (boxname == "box-one") {
+     if (boxname == "box-one") {
               FechOne(base, symbols);
   }
 }
@@ -120,12 +119,14 @@ if(fromTwo.value[0] == 0 && fromTwo.value.length > 1){
 function FechOne(baseNumber, symbolsNumber) {
   if (baseNumber != symbolsNumber) {
     fetch(`${url}base=${symbolsNumber}&symbols=${baseNumber}`)
+
       .then((res) => {
         return res.json();
       })
       .then((data) => {
         fromOne.value =
           Number(fromTwo.value.replace(/\s+/g, "")) * data.rates[`${baseNumber}`];
+
           twoNum.innerHTML = `1${data.base}=${data.rates[`${baseNumber}`]}${baseNumber}`;
 
         fetch(`${url}base=${baseNumber} & symbols=${symbolsNumber}`)
@@ -139,16 +140,15 @@ function FechOne(baseNumber, symbolsNumber) {
   }   else {fromOne.value = fromTwo.value; oneNum.innerHTML = `1${base}=1${base}`; twoNum.innerHTML = `1${base}=1${base}`;
   }
 }
-
 function FechTwo(baseNumber, symbolsNumber) {
   if (baseNumber != symbolsNumber) {
     fetch(`${url}base=${baseNumber}&symbols=${symbolsNumber}`)
+
       .then((res) => {
         return res.json();
       })
       .then((data) => {
-        fromTwo.value =
-          fromOne.value.replace(/\s+/g, "") * data.rates[`${symbolsNumber}`]; oneNum.innerHTML = `1${data.base}=${data.rates[`${symbolsNumber}`]}${symbolsNumber}`;
+        fromTwo.value = fromOne.value.replace(/\s+/g, "") * data.rates[`${symbolsNumber}`]; oneNum.innerHTML = `1${data.base}=${data.rates[`${symbolsNumber}`]}${symbolsNumber}`;
           
         fetch(`${url}base=${symbolsNumber} & symbols=${baseNumber}`)
           .then((response) => {
