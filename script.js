@@ -13,6 +13,16 @@ let symbols = "USD";
 let url = "https://api.exchangerate.host/latest?";
 FechTwo(base, symbols)
 
+ var numberMask = IMask(fromOne, {
+    mask: Number,
+     signed: false,           
+     scale: 6,
+    thousandsSeparator: " ",
+    padFractionalZeros: false,
+    normalizeZeros: true,
+    radix: ".",
+    mapToRadix: [","],
+  });
 function decPlay() {
   oneBox.forEach((item) => {
     item.addEventListener("click", function () {
@@ -129,16 +139,7 @@ function FechOne(baseNumber, symbolsNumber) {
   }   else {fromOne.value = fromTwo.value; oneNum.innerHTML = `1${base}=1${base}`; twoNum.innerHTML = `1${base}=1${base}`;
   }
 }
- var numberMask = IMask(fromOne, {
-    mask: Number,
-     signed: false,           
-     scale: 6,
-    thousandsSeparator: " ",
-    padFractionalZeros: false,
-    normalizeZeros: true,
-    radix: ".",
-    mapToRadix: [","],
-  });
+
 function FechTwo(baseNumber, symbolsNumber) {
   if (baseNumber != symbolsNumber) {
     fetch(`${url}base=${baseNumber}&symbols=${symbolsNumber}`)
