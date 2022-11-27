@@ -16,7 +16,7 @@ FechTwo(base, symbols)
  var numberMask = IMask(fromOne, {
     mask: Number,
      signed: false,           
-     scale: 6,
+     scale: 10,
     thousandsSeparator: " ",
     padFractionalZeros: false,
     normalizeZeros: true,
@@ -166,7 +166,7 @@ function FechTwo(baseNumber, symbolsNumber) {
  var numberMask = IMask(fromTwo, {
     mask: Number,
     signed: false,           
-    scale: 6,
+    scale: 10,
     thousandsSeparator: " ",
     padFractionalZeros: false,
     normalizeZeros: true,

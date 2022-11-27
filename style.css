@@ -153,7 +153,7 @@ body {
     height: 7.544vw;
     border: 0.074vw solid #e5e5e5;
     box-sizing: border-box;
-    border-radius: 3px;
+    border-radius: 7px;
   }
   input {
     width: 17.678vw;
@@ -197,12 +197,13 @@ body {
     width: 19.157vw;
     height: 2.219vw;
     box-sizing: border-box;
-    border-radius: 0.222vw;
+    border-radius: 2.222vw;
     display: flex;
     margin-bottom: 1.479vw;
   }
   .money-start {
     background-color: #833ae0;
+    
   }
 }
   
